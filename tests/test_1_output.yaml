@@ -2,16 +2,14 @@ vxlan:
   overlay_extensions:
     route_control:
       ipv4_access_lists:
-      - name: myACL
+      - name: myacl
         entries:
-          - seq_number: 5
-            remark: Allow_traffic
-          - seq_number: 10
-            operation: permit
-            protocol: ip
-            source:
-              ip: 192.168.10.0
-              wildcard: 0.0.0.255
-            destination:
-              ip: 192.168.200.0
-              wildcard: 0.0.0.255
+        - seq_number: 5
+          remark: Allow_traffic
+        - seq_number: 10
+          operation: permit
+          protocol: ip
+          source:
+            ip: 192.168.10.0/24
+          destination:
+            ip: 192.168.200.0/24
