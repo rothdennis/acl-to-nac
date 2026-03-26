@@ -1,4 +1,4 @@
-# acl-to-nac
+# ACL to NaC Converter
 
 [![Tests](https://github.com/rothdennis/acl-to-nac/actions/workflows/tests.yml/badge.svg)](https://github.com/rothdennis/acl-to-nac/actions/workflows/tests.yml)
 
