@@ -1,7 +1,7 @@
 # Example 1
 ip access-list myacl
   5 remark Allow_traffic
-  10 permit ip 192.168.10.0 0.0.0.255 192.168.200.0 0.0.0.255
+  10 permit ip 192.168.10.0 0.63.0.255 192.168.200.0 127.0.0.255
 
 # Example 2
 ip access-list acl-103
