@@ -37,6 +37,19 @@ def wildcard_to_prefix(wildcard):
     return sum(bin(x).count('1') for x in mask_parts)
 
 
+def is_standard_wildcard(wildcard):
+    """Return True if the wildcard is a contiguous (standard) wildcard mask.
+
+    A standard wildcard has the form 0...0 1...1 in binary (all zero bits
+    precede all one bits), which corresponds to a valid CIDR subnet mask when
+    inverted.  Non-contiguous wildcards (e.g. 0.127.0.255) cannot be
+    represented as a CIDR prefix and must be kept as-is.
+    """
+    parts = [int(x) for x in wildcard.split('.')]
+    w = (parts[0] << 24) | (parts[1] << 16) | (parts[2] << 8) | parts[3]
+    return (w & (w + 1)) == 0
+
+
 def _is_ipv6(token):
     """Return True if a token looks like an IPv6 address or prefix."""
     return ':' in token
@@ -73,8 +86,11 @@ def parse_address(tokens):
         # ip + wildcard mask pair
         ip, wildcard = tokens[0], tokens[1]
         tokens = tokens[2:]
-        prefix = wildcard_to_prefix(wildcard)
-        addr = {'ip': f'{ip}/{prefix}'}
+        if is_standard_wildcard(wildcard):
+            prefix = wildcard_to_prefix(wildcard)
+            addr = {'ip': f'{ip}/{prefix}'}
+        else:
+            addr = {'ip': ip, 'wildcard': wildcard}
 
     # Optional port operator immediately following the address
     if tokens and tokens[0] in PORT_OPERATORS:
