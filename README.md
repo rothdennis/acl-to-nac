@@ -86,18 +86,6 @@ vxlan:
             any: true
 ```
 
-You can also import the converter directly in your own Python scripts:
-
-```python
-from main import parse_acl_text, parse_acl_file
-
-# From a string
-data = parse_acl_text("ip access-list myacl\n  10 permit ip any any\n")
-
-# From a file
-data = parse_acl_file("my_acl.txt")
-```
-
 ## Running the Tests
 
 ```bash
