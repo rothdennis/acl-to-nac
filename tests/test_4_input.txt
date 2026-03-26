@@ -1,0 +1,4 @@
+ip access-list http-option-acl
+  statistics per-entry
+  10 permit tcp any any http-method get tcp-option-length 4
+  20 permit tcp any any http-method post

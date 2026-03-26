@@ -1,0 +1,26 @@
+vxlan:
+  overlay_extensions:
+    route_control:
+      ipv4_access_lists:
+      - name: http-option-acl
+        statistics_per_entry: true
+        entries:
+          - seq_number: 10
+            operation: permit
+            protocol: tcp
+            source:
+              any: true
+            destination:
+              any: true
+            filtering_options:
+              - http_method: get
+                tcp_option_length: 4
+          - seq_number: 20
+            operation: permit
+            protocol: tcp
+            source:
+              any: true
+            destination:
+              any: true
+            filtering_options:
+              - http_method: post

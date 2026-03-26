@@ -1,0 +1,44 @@
+vxlan:
+  overlay_extensions:
+    route_control:
+      ipv4_access_lists:
+      - name: acl-103
+        entries:
+          - seq_number: 10
+            operation: permit
+            protocol: tcp
+            source:
+              any: true
+            destination:
+              any: true
+              port_number:
+                operator: gt
+                port: 1023
+            filtering_options:
+              - flags:
+                - establish: true
+      - name: acl-104
+        entries:
+          - seq_number: 10
+            operation: permit
+            protocol: tcp
+            source:
+              any: true
+              port_number:
+                operator: eq
+                port: 80
+            destination:
+              host: 192.168.1.100/32
+          - seq_number: 20
+            operation: permit
+            protocol: tcp
+            source:
+              any: true
+            destination:
+              ip: 192.168.1.101/24
+              port_number:
+                operator: eq
+                port: 20
+            filtering_options:
+              - flags:
+                - establish: true

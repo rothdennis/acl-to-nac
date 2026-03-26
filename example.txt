@@ -1,0 +1,25 @@
+# Example 1
+ip access-list myacl
+  5 remark Allow_traffic
+  10 permit ip 192.168.10.0 0.0.0.255 192.168.200.0 0.0.0.255
+
+# Example 2
+ip access-list acl-103
+  10 permit tcp any any gt 1023 established
+ip access-list acl-104
+  10 permit tcp any eq www 192.168.1.100/32
+  20 permit tcp any 192.168.1.0 0.0.0.255 eq ftp-data established
+
+# Example 3
+ip access-list logging-acl
+  10 permit ip any 10.30.30.0 0.0.0.255 log
+
+# Example 4
+ip access-list http-option-acl
+  statistics per-entry
+  10 permit tcp any any http-method get tcp-option-length 4
+  20 permit tcp any any http-method post
+
+# Example 5
+ipv6 access-list ACL6-101
+  10 permit tcp 2001:db8:300:201::/64 eq telnet any

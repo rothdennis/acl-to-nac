@@ -1,0 +1,2 @@
+ipv6 access-list ACL6-101
+  10 permit tcp 2001:db8:300:201::/64 eq telnet any

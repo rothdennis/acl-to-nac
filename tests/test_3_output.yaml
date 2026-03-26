@@ -1,0 +1,14 @@
+vxlan:
+  overlay_extensions:
+    route_control:
+      ipv4_access_lists:
+      - name: logging-acl
+        entries:
+          - seq_number: 10
+            operation: permit
+            protocol: ip
+            source:
+              any: true
+            destination:
+              ip: 10.30.30.0/24
+            log: true

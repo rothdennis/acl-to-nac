@@ -1,0 +1,16 @@
+vxlan:
+  overlay_extensions:
+    route_control:
+      ipv6_access_lists:
+        - name: ACL6-101
+          entries:
+            - seq_number: 10
+              operation: permit
+              protocol: tcp
+              source:
+                ip: 2001:db8:300:201::/64
+                port_number:
+                  operator: eq
+                  port: 23
+              destination:
+                any: true
